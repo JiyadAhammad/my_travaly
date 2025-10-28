@@ -1,8 +1,12 @@
 {
     "cSpell.words": [
+        "authtoken",
         "firestore",
+        "prefs",
+        "realme",
         "supabase",
         "Travaly",
-        "usecase"
+        "usecase",
+        "visitortoken"
     ]
 }

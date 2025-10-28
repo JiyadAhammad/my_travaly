@@ -78,8 +78,10 @@ lib/
   |     |     ├── enums.dart
   |     |     └── ...
   |     ├── error/   # Common app exceptions and failures
-  |     |     ├── exception.dart
   |     |     ├── failures.dart
+  |     |     └── ...
+  |     ├── network/   # Common app exceptions and failures
+  |     |     ├── dio_client.dart # Dio interceptor
   |     |     └── ...
   |     ├── extension/  # Extension methods for core types
   |     |     ├── string_extension.dart
@@ -97,6 +99,7 @@ lib/
   |     |     ├── usecase.dart
   |     |     └── ...
   |     ├── utils/    # Common utilities and helpers
+  |     |     ├── app_logger.dart
   |     |     ├── show_snackbar.dart
   |     |     └── ...
   |     ├── widgets/  # Reusable widgets shared across the app

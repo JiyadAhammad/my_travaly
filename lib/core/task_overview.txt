@@ -1,0 +1,48 @@
+Task Overview
+
+You are required to build a simple 3-page Flutter application as described below:
+
+Page 1 - Google Sign In/Sign Up
+
+Implement a Google Sign-In/Sign-Up screen.
+This will be a frontend-only implementation (no API call needed).
+Purpose: to assess your understanding of Google Authentication integration in Flutter.
+Page 2 - Home Page (Hotel List)
+
+Display a list of sample hotels on the home page.
+Implement a search bar allowing users to search by hotel name, city, state, or country.
+You will use the provided API for fetching search results.
+Page 3 - Search Results
+
+Display the search results fetched from the API.
+Implement pagination for listing results efficiently.
+
+
+
+
+API Information
+
+Base URL: https://api.mytravaly.com/public/v1/
+API Documentation: View on Postman
+Auth Token: 71523fdd8d26f585315b4233e39d9263
+
+Google singIn (Implement through firebase)
+
+
+Total 6 api
+1. Register Device ✅
+2. Search Auto complete 
+3. Get Property List
+4. Get Search Result
+5. Get Currency List
+6. App Settings
+
+
+
+
+Submission Details
+
+Deadline: 1st November 2025
+Submission Format:
+Upload your completed project to a public GitHub repository.
+Reply to this email with the repository link.
