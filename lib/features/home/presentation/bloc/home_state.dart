@@ -8,6 +8,12 @@ sealed class HomeState with _$HomeState {
     required String? visitorToken,
     required bool isError,
     required String? errorMessage,
+
+    /// Search AutoComplete states
+    required bool isSearchLoading,
+    required SearchAutoCompleteResponseEntity? searchResult,
+    required bool isSearchError,
+    required String? searchErrorMessage,
   }) = _HomeState;
 
   factory HomeState.initial() => const HomeState(
@@ -16,5 +22,11 @@ sealed class HomeState with _$HomeState {
     visitorToken: null,
     isError: false,
     errorMessage: null,
+
+    /// Search AutoComplete states
+    isSearchLoading: false,
+    searchResult: null,
+    isSearchError: false,
+    searchErrorMessage: null,
   );
 }

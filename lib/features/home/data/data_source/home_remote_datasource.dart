@@ -1,34 +1,30 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:my_travaly/core/error/failures.dart';
-import 'package:my_travaly/core/utils/app_logger.dart';
 
+import '../../../../core/error/failures.dart';
 import '../../../../core/network/dio_client.dart';
+import '../../../../core/network/dio_error_handler.dart';
+import '../../../../core/utils/app_logger.dart';
 import '../model/device_register_model.dart';
+import '../model/search_auto_complete_model.dart';
+import '../model/search_auto_complete_response_model.dart';
 
 abstract interface class HomeRemoteDatasource {
   /// Register Device and obtain visitor token
   Future<String> registerDevice({
     required DeviceRegisterModel deviceRegisterModel,
   });
+
+  /// Search Auto complete
+  Future<SearchAutoCompleteResponseModel> searchAutoComplete({
+    required SearchAutoCompleteModel model,
+  });
 }
 
 class HomeRemoteDatasourceImpl implements HomeRemoteDatasource {
   HomeRemoteDatasourceImpl(this.dioClient);
   final DioClient dioClient;
-
-  /*
-  Expected Output
-   {
-      "status": true,
-      "message": "Device registered successfully.",
-      "responseCode": 201,
-      "data": {
-        "visitorToken": "7a1f-1c7c-d871-aaf9-5ada-a1a0-abac-ccae"
-      }
-    }
-  */
 
   @override
   Future<String> registerDevice({
@@ -41,6 +37,18 @@ class HomeRemoteDatasourceImpl implements HomeRemoteDatasource {
       );
 
       final result = response.data;
+
+      /*
+      Expected Output
+      {
+          "status": true,
+          "message": "Device registered successfully.",
+          "responseCode": 201,
+          "data": {
+            "visitorToken": "7a1f-1c7c-d871-aaf9-5ada-a1a0-abac-ccae"
+          }
+        }
+      */
       AppLogger.info('$result api response');
       if (response.statusCode == 201) {
         final Map<String, dynamic>? data = result['data'];
@@ -60,25 +68,36 @@ class HomeRemoteDatasourceImpl implements HomeRemoteDatasource {
 
       throw Exception('Failed to register device: ${response.data}');
     } on DioException catch (e) {
-      final int statusCode = e.response?.statusCode ?? -1;
-      if (e.type == DioExceptionType.connectionError ||
-          e.type == DioExceptionType.connectionTimeout ||
-          e.type == DioExceptionType.unknown) {
-        throw ClientFailures(
-          message: 'No internet connection or timeout',
-          statusCode: statusCode,
-        );
-      } else if (e.response != null) {
-        throw ServerFailures(
-          message: 'Server responded with error: ${e.response?.statusCode}',
-          statusCode: statusCode,
-        );
-      } else {
-        throw ClientFailures(
-          message: 'Unexpected client error: ${e.message}',
-          statusCode: statusCode,
-        );
+      throw DioErrorHandler.handle(e);
+    } catch (e) {
+      throw ClientFailures(message: 'Unexpected error: $e', statusCode: -1);
+    }
+  }
+
+  @override
+  Future<SearchAutoCompleteResponseModel> searchAutoComplete({
+    required SearchAutoCompleteModel model,
+  }) async {
+    try {
+      final response = await dioClient.dio.post(
+        '',
+        data: jsonEncode(model.toJson()),
+      );
+
+      final result = response.data;
+      final statusCode = response.statusCode ?? -1;
+
+      AppLogger.info('$result api response');
+      if (statusCode == 200) {
+        return SearchAutoCompleteResponseModel.fromJson(result);
       }
+
+      throw ServerFailures(
+        message: result['message'] ?? 'Unexpected Error Occurred',
+        statusCode: statusCode,
+      );
+    } on DioException catch (e) {
+      throw DioErrorHandler.handle(e);
     } catch (e) {
       throw ClientFailures(message: 'Unexpected error: $e', statusCode: -1);
     }

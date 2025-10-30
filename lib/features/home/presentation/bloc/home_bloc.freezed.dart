@@ -55,13 +55,14 @@ extension HomeEventPatterns on HomeEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Started value)?  started,TResult Function( _RegisterDevice value)?  registerDevice,TResult Function( _GetDeviceInfo value)?  getDeviceInfo,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Started value)?  started,TResult Function( _GetDeviceInfo value)?  getDeviceInfo,TResult Function( _RegisterDevice value)?  registerDevice,TResult Function( _SearchAutoComplete value)?  searchAutoComplete,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Started() when started != null:
-return started(_that);case _RegisterDevice() when registerDevice != null:
-return registerDevice(_that);case _GetDeviceInfo() when getDeviceInfo != null:
-return getDeviceInfo(_that);case _:
+return started(_that);case _GetDeviceInfo() when getDeviceInfo != null:
+return getDeviceInfo(_that);case _RegisterDevice() when registerDevice != null:
+return registerDevice(_that);case _SearchAutoComplete() when searchAutoComplete != null:
+return searchAutoComplete(_that);case _:
   return orElse();
 
 }
@@ -79,13 +80,14 @@ return getDeviceInfo(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Started value)  started,required TResult Function( _RegisterDevice value)  registerDevice,required TResult Function( _GetDeviceInfo value)  getDeviceInfo,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Started value)  started,required TResult Function( _GetDeviceInfo value)  getDeviceInfo,required TResult Function( _RegisterDevice value)  registerDevice,required TResult Function( _SearchAutoComplete value)  searchAutoComplete,}){
 final _that = this;
 switch (_that) {
 case _Started():
-return started(_that);case _RegisterDevice():
-return registerDevice(_that);case _GetDeviceInfo():
-return getDeviceInfo(_that);case _:
+return started(_that);case _GetDeviceInfo():
+return getDeviceInfo(_that);case _RegisterDevice():
+return registerDevice(_that);case _SearchAutoComplete():
+return searchAutoComplete(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -102,13 +104,14 @@ return getDeviceInfo(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Started value)?  started,TResult? Function( _RegisterDevice value)?  registerDevice,TResult? Function( _GetDeviceInfo value)?  getDeviceInfo,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Started value)?  started,TResult? Function( _GetDeviceInfo value)?  getDeviceInfo,TResult? Function( _RegisterDevice value)?  registerDevice,TResult? Function( _SearchAutoComplete value)?  searchAutoComplete,}){
 final _that = this;
 switch (_that) {
 case _Started() when started != null:
-return started(_that);case _RegisterDevice() when registerDevice != null:
-return registerDevice(_that);case _GetDeviceInfo() when getDeviceInfo != null:
-return getDeviceInfo(_that);case _:
+return started(_that);case _GetDeviceInfo() when getDeviceInfo != null:
+return getDeviceInfo(_that);case _RegisterDevice() when registerDevice != null:
+return registerDevice(_that);case _SearchAutoComplete() when searchAutoComplete != null:
+return searchAutoComplete(_that);case _:
   return null;
 
 }
@@ -125,12 +128,13 @@ return getDeviceInfo(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  started,TResult Function( DeviceRegisterParam deviceData)?  registerDevice,TResult Function()?  getDeviceInfo,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  started,TResult Function()?  getDeviceInfo,TResult Function( DeviceRegisterParam deviceData)?  registerDevice,TResult Function( SearchAutoCompleteParam searchAutoCompleteData)?  searchAutoComplete,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Started() when started != null:
-return started();case _RegisterDevice() when registerDevice != null:
-return registerDevice(_that.deviceData);case _GetDeviceInfo() when getDeviceInfo != null:
-return getDeviceInfo();case _:
+return started();case _GetDeviceInfo() when getDeviceInfo != null:
+return getDeviceInfo();case _RegisterDevice() when registerDevice != null:
+return registerDevice(_that.deviceData);case _SearchAutoComplete() when searchAutoComplete != null:
+return searchAutoComplete(_that.searchAutoCompleteData);case _:
   return orElse();
 
 }
@@ -148,12 +152,13 @@ return getDeviceInfo();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  started,required TResult Function( DeviceRegisterParam deviceData)  registerDevice,required TResult Function()  getDeviceInfo,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  started,required TResult Function()  getDeviceInfo,required TResult Function( DeviceRegisterParam deviceData)  registerDevice,required TResult Function( SearchAutoCompleteParam searchAutoCompleteData)  searchAutoComplete,}) {final _that = this;
 switch (_that) {
 case _Started():
-return started();case _RegisterDevice():
-return registerDevice(_that.deviceData);case _GetDeviceInfo():
-return getDeviceInfo();case _:
+return started();case _GetDeviceInfo():
+return getDeviceInfo();case _RegisterDevice():
+return registerDevice(_that.deviceData);case _SearchAutoComplete():
+return searchAutoComplete(_that.searchAutoCompleteData);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -170,12 +175,13 @@ return getDeviceInfo();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  started,TResult? Function( DeviceRegisterParam deviceData)?  registerDevice,TResult? Function()?  getDeviceInfo,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  started,TResult? Function()?  getDeviceInfo,TResult? Function( DeviceRegisterParam deviceData)?  registerDevice,TResult? Function( SearchAutoCompleteParam searchAutoCompleteData)?  searchAutoComplete,}) {final _that = this;
 switch (_that) {
 case _Started() when started != null:
-return started();case _RegisterDevice() when registerDevice != null:
-return registerDevice(_that.deviceData);case _GetDeviceInfo() when getDeviceInfo != null:
-return getDeviceInfo();case _:
+return started();case _GetDeviceInfo() when getDeviceInfo != null:
+return getDeviceInfo();case _RegisterDevice() when registerDevice != null:
+return registerDevice(_that.deviceData);case _SearchAutoComplete() when searchAutoComplete != null:
+return searchAutoComplete(_that.searchAutoCompleteData);case _:
   return null;
 
 }
@@ -207,6 +213,38 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
   return 'HomeEvent.started()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _GetDeviceInfo implements HomeEvent {
+  const _GetDeviceInfo();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GetDeviceInfo);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'HomeEvent.getDeviceInfo()';
 }
 
 
@@ -284,39 +322,74 @@ as DeviceRegisterParam,
 /// @nodoc
 
 
-class _GetDeviceInfo implements HomeEvent {
-  const _GetDeviceInfo();
+class _SearchAutoComplete implements HomeEvent {
+  const _SearchAutoComplete({required this.searchAutoCompleteData});
   
 
+ final  SearchAutoCompleteParam searchAutoCompleteData;
 
-
+/// Create a copy of HomeEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SearchAutoCompleteCopyWith<_SearchAutoComplete> get copyWith => __$SearchAutoCompleteCopyWithImpl<_SearchAutoComplete>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GetDeviceInfo);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchAutoComplete&&(identical(other.searchAutoCompleteData, searchAutoCompleteData) || other.searchAutoCompleteData == searchAutoCompleteData));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,searchAutoCompleteData);
 
 @override
 String toString() {
-  return 'HomeEvent.getDeviceInfo()';
+  return 'HomeEvent.searchAutoComplete(searchAutoCompleteData: $searchAutoCompleteData)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class _$SearchAutoCompleteCopyWith<$Res> implements $HomeEventCopyWith<$Res> {
+  factory _$SearchAutoCompleteCopyWith(_SearchAutoComplete value, $Res Function(_SearchAutoComplete) _then) = __$SearchAutoCompleteCopyWithImpl;
+@useResult
+$Res call({
+ SearchAutoCompleteParam searchAutoCompleteData
+});
 
 
+
+
+}
+/// @nodoc
+class __$SearchAutoCompleteCopyWithImpl<$Res>
+    implements _$SearchAutoCompleteCopyWith<$Res> {
+  __$SearchAutoCompleteCopyWithImpl(this._self, this._then);
+
+  final _SearchAutoComplete _self;
+  final $Res Function(_SearchAutoComplete) _then;
+
+/// Create a copy of HomeEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? searchAutoCompleteData = null,}) {
+  return _then(_SearchAutoComplete(
+searchAutoCompleteData: null == searchAutoCompleteData ? _self.searchAutoCompleteData : searchAutoCompleteData // ignore: cast_nullable_to_non_nullable
+as SearchAutoCompleteParam,
+  ));
+}
+
+
+}
 
 /// @nodoc
 mixin _$HomeState {
 
- bool get isLoading; bool get isVisitorTokenReceived; String? get visitorToken; bool get isError; String? get errorMessage;
+ bool get isLoading; bool get isVisitorTokenReceived; String? get visitorToken; bool get isError; String? get errorMessage;/// Search AutoComplete states
+ bool get isSearchLoading; SearchAutoCompleteResponseEntity? get searchResult; bool get isSearchError; String? get searchErrorMessage;
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -327,16 +400,16 @@ $HomeStateCopyWith<HomeState> get copyWith => _$HomeStateCopyWithImpl<HomeState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isVisitorTokenReceived, isVisitorTokenReceived) || other.isVisitorTokenReceived == isVisitorTokenReceived)&&(identical(other.visitorToken, visitorToken) || other.visitorToken == visitorToken)&&(identical(other.isError, isError) || other.isError == isError)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isVisitorTokenReceived, isVisitorTokenReceived) || other.isVisitorTokenReceived == isVisitorTokenReceived)&&(identical(other.visitorToken, visitorToken) || other.visitorToken == visitorToken)&&(identical(other.isError, isError) || other.isError == isError)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isSearchLoading, isSearchLoading) || other.isSearchLoading == isSearchLoading)&&(identical(other.searchResult, searchResult) || other.searchResult == searchResult)&&(identical(other.isSearchError, isSearchError) || other.isSearchError == isSearchError)&&(identical(other.searchErrorMessage, searchErrorMessage) || other.searchErrorMessage == searchErrorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,isVisitorTokenReceived,visitorToken,isError,errorMessage);
+int get hashCode => Object.hash(runtimeType,isLoading,isVisitorTokenReceived,visitorToken,isError,errorMessage,isSearchLoading,searchResult,isSearchError,searchErrorMessage);
 
 @override
 String toString() {
-  return 'HomeState(isLoading: $isLoading, isVisitorTokenReceived: $isVisitorTokenReceived, visitorToken: $visitorToken, isError: $isError, errorMessage: $errorMessage)';
+  return 'HomeState(isLoading: $isLoading, isVisitorTokenReceived: $isVisitorTokenReceived, visitorToken: $visitorToken, isError: $isError, errorMessage: $errorMessage, isSearchLoading: $isSearchLoading, searchResult: $searchResult, isSearchError: $isSearchError, searchErrorMessage: $searchErrorMessage)';
 }
 
 
@@ -347,7 +420,7 @@ abstract mixin class $HomeStateCopyWith<$Res>  {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) _then) = _$HomeStateCopyWithImpl;
 @useResult
 $Res call({
- bool isLoading, bool isVisitorTokenReceived, String? visitorToken, bool isError, String? errorMessage
+ bool isLoading, bool isVisitorTokenReceived, String? visitorToken, bool isError, String? errorMessage, bool isSearchLoading, SearchAutoCompleteResponseEntity? searchResult, bool isSearchError, String? searchErrorMessage
 });
 
 
@@ -364,13 +437,17 @@ class _$HomeStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? isVisitorTokenReceived = null,Object? visitorToken = freezed,Object? isError = null,Object? errorMessage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? isVisitorTokenReceived = null,Object? visitorToken = freezed,Object? isError = null,Object? errorMessage = freezed,Object? isSearchLoading = null,Object? searchResult = freezed,Object? isSearchError = null,Object? searchErrorMessage = freezed,}) {
   return _then(_self.copyWith(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,isVisitorTokenReceived: null == isVisitorTokenReceived ? _self.isVisitorTokenReceived : isVisitorTokenReceived // ignore: cast_nullable_to_non_nullable
 as bool,visitorToken: freezed == visitorToken ? _self.visitorToken : visitorToken // ignore: cast_nullable_to_non_nullable
 as String?,isError: null == isError ? _self.isError : isError // ignore: cast_nullable_to_non_nullable
 as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String?,isSearchLoading: null == isSearchLoading ? _self.isSearchLoading : isSearchLoading // ignore: cast_nullable_to_non_nullable
+as bool,searchResult: freezed == searchResult ? _self.searchResult : searchResult // ignore: cast_nullable_to_non_nullable
+as SearchAutoCompleteResponseEntity?,isSearchError: null == isSearchError ? _self.isSearchError : isSearchError // ignore: cast_nullable_to_non_nullable
+as bool,searchErrorMessage: freezed == searchErrorMessage ? _self.searchErrorMessage : searchErrorMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -453,10 +530,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  bool isVisitorTokenReceived,  String? visitorToken,  bool isError,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  bool isVisitorTokenReceived,  String? visitorToken,  bool isError,  String? errorMessage,  bool isSearchLoading,  SearchAutoCompleteResponseEntity? searchResult,  bool isSearchError,  String? searchErrorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomeState() when $default != null:
-return $default(_that.isLoading,_that.isVisitorTokenReceived,_that.visitorToken,_that.isError,_that.errorMessage);case _:
+return $default(_that.isLoading,_that.isVisitorTokenReceived,_that.visitorToken,_that.isError,_that.errorMessage,_that.isSearchLoading,_that.searchResult,_that.isSearchError,_that.searchErrorMessage);case _:
   return orElse();
 
 }
@@ -474,10 +551,10 @@ return $default(_that.isLoading,_that.isVisitorTokenReceived,_that.visitorToken,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  bool isVisitorTokenReceived,  String? visitorToken,  bool isError,  String? errorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  bool isVisitorTokenReceived,  String? visitorToken,  bool isError,  String? errorMessage,  bool isSearchLoading,  SearchAutoCompleteResponseEntity? searchResult,  bool isSearchError,  String? searchErrorMessage)  $default,) {final _that = this;
 switch (_that) {
 case _HomeState():
-return $default(_that.isLoading,_that.isVisitorTokenReceived,_that.visitorToken,_that.isError,_that.errorMessage);}
+return $default(_that.isLoading,_that.isVisitorTokenReceived,_that.visitorToken,_that.isError,_that.errorMessage,_that.isSearchLoading,_that.searchResult,_that.isSearchError,_that.searchErrorMessage);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -491,10 +568,10 @@ return $default(_that.isLoading,_that.isVisitorTokenReceived,_that.visitorToken,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  bool isVisitorTokenReceived,  String? visitorToken,  bool isError,  String? errorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  bool isVisitorTokenReceived,  String? visitorToken,  bool isError,  String? errorMessage,  bool isSearchLoading,  SearchAutoCompleteResponseEntity? searchResult,  bool isSearchError,  String? searchErrorMessage)?  $default,) {final _that = this;
 switch (_that) {
 case _HomeState() when $default != null:
-return $default(_that.isLoading,_that.isVisitorTokenReceived,_that.visitorToken,_that.isError,_that.errorMessage);case _:
+return $default(_that.isLoading,_that.isVisitorTokenReceived,_that.visitorToken,_that.isError,_that.errorMessage,_that.isSearchLoading,_that.searchResult,_that.isSearchError,_that.searchErrorMessage);case _:
   return null;
 
 }
@@ -506,7 +583,7 @@ return $default(_that.isLoading,_that.isVisitorTokenReceived,_that.visitorToken,
 
 
 class _HomeState implements HomeState {
-  const _HomeState({required this.isLoading, required this.isVisitorTokenReceived, required this.visitorToken, required this.isError, required this.errorMessage});
+  const _HomeState({required this.isLoading, required this.isVisitorTokenReceived, required this.visitorToken, required this.isError, required this.errorMessage, required this.isSearchLoading, required this.searchResult, required this.isSearchError, required this.searchErrorMessage});
   
 
 @override final  bool isLoading;
@@ -514,6 +591,11 @@ class _HomeState implements HomeState {
 @override final  String? visitorToken;
 @override final  bool isError;
 @override final  String? errorMessage;
+/// Search AutoComplete states
+@override final  bool isSearchLoading;
+@override final  SearchAutoCompleteResponseEntity? searchResult;
+@override final  bool isSearchError;
+@override final  String? searchErrorMessage;
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
@@ -525,16 +607,16 @@ _$HomeStateCopyWith<_HomeState> get copyWith => __$HomeStateCopyWithImpl<_HomeSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isVisitorTokenReceived, isVisitorTokenReceived) || other.isVisitorTokenReceived == isVisitorTokenReceived)&&(identical(other.visitorToken, visitorToken) || other.visitorToken == visitorToken)&&(identical(other.isError, isError) || other.isError == isError)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isVisitorTokenReceived, isVisitorTokenReceived) || other.isVisitorTokenReceived == isVisitorTokenReceived)&&(identical(other.visitorToken, visitorToken) || other.visitorToken == visitorToken)&&(identical(other.isError, isError) || other.isError == isError)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isSearchLoading, isSearchLoading) || other.isSearchLoading == isSearchLoading)&&(identical(other.searchResult, searchResult) || other.searchResult == searchResult)&&(identical(other.isSearchError, isSearchError) || other.isSearchError == isSearchError)&&(identical(other.searchErrorMessage, searchErrorMessage) || other.searchErrorMessage == searchErrorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,isVisitorTokenReceived,visitorToken,isError,errorMessage);
+int get hashCode => Object.hash(runtimeType,isLoading,isVisitorTokenReceived,visitorToken,isError,errorMessage,isSearchLoading,searchResult,isSearchError,searchErrorMessage);
 
 @override
 String toString() {
-  return 'HomeState(isLoading: $isLoading, isVisitorTokenReceived: $isVisitorTokenReceived, visitorToken: $visitorToken, isError: $isError, errorMessage: $errorMessage)';
+  return 'HomeState(isLoading: $isLoading, isVisitorTokenReceived: $isVisitorTokenReceived, visitorToken: $visitorToken, isError: $isError, errorMessage: $errorMessage, isSearchLoading: $isSearchLoading, searchResult: $searchResult, isSearchError: $isSearchError, searchErrorMessage: $searchErrorMessage)';
 }
 
 
@@ -545,7 +627,7 @@ abstract mixin class _$HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Re
   factory _$HomeStateCopyWith(_HomeState value, $Res Function(_HomeState) _then) = __$HomeStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool isLoading, bool isVisitorTokenReceived, String? visitorToken, bool isError, String? errorMessage
+ bool isLoading, bool isVisitorTokenReceived, String? visitorToken, bool isError, String? errorMessage, bool isSearchLoading, SearchAutoCompleteResponseEntity? searchResult, bool isSearchError, String? searchErrorMessage
 });
 
 
@@ -562,13 +644,17 @@ class __$HomeStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? isVisitorTokenReceived = null,Object? visitorToken = freezed,Object? isError = null,Object? errorMessage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? isVisitorTokenReceived = null,Object? visitorToken = freezed,Object? isError = null,Object? errorMessage = freezed,Object? isSearchLoading = null,Object? searchResult = freezed,Object? isSearchError = null,Object? searchErrorMessage = freezed,}) {
   return _then(_HomeState(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,isVisitorTokenReceived: null == isVisitorTokenReceived ? _self.isVisitorTokenReceived : isVisitorTokenReceived // ignore: cast_nullable_to_non_nullable
 as bool,visitorToken: freezed == visitorToken ? _self.visitorToken : visitorToken // ignore: cast_nullable_to_non_nullable
 as String?,isError: null == isError ? _self.isError : isError // ignore: cast_nullable_to_non_nullable
 as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String?,isSearchLoading: null == isSearchLoading ? _self.isSearchLoading : isSearchLoading // ignore: cast_nullable_to_non_nullable
+as bool,searchResult: freezed == searchResult ? _self.searchResult : searchResult // ignore: cast_nullable_to_non_nullable
+as SearchAutoCompleteResponseEntity?,isSearchError: null == isSearchError ? _self.isSearchError : isSearchError // ignore: cast_nullable_to_non_nullable
+as bool,searchErrorMessage: freezed == searchErrorMessage ? _self.searchErrorMessage : searchErrorMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

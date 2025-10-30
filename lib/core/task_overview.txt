@@ -3,17 +3,16 @@ Task Overview
 You are required to build a simple 3-page Flutter application as described below:
 
 Page 1 - Google Sign In/Sign Up
-
 Implement a Google Sign-In/Sign-Up screen.
 This will be a frontend-only implementation (no API call needed).
 Purpose: to assess your understanding of Google Authentication integration in Flutter.
-Page 2 - Home Page (Hotel List)
 
+Page 2 - Home Page (Hotel List)
 Display a list of sample hotels on the home page.
 Implement a search bar allowing users to search by hotel name, city, state, or country.
 You will use the provided API for fetching search results.
-Page 3 - Search Results
 
+Page 3 - Search Results
 Display the search results fetched from the API.
 Implement pagination for listing results efficiently.
 

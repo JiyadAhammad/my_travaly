@@ -82,6 +82,7 @@ lib/
   |     |     └── ...
   |     ├── network/   # Common app exceptions and failures
   |     |     ├── dio_client.dart # Dio interceptor
+  |     |     └── dio_error_handler.dart # Dio Exception Handler
   |     |     └── ...
   |     ├── extension/  # Extension methods for core types
   |     |     ├── string_extension.dart
