@@ -2,7 +2,7 @@
     {
         "action":"searchAutoComplete",
         "searchAutoComplete":{       
-            "inputText":"indi",
+            "inputText":"india",
             "searchType":[
                 "byCity",
                 "byState",
@@ -15,14 +15,18 @@
     }
 */
 
-class SearchAutoCompleteEntity {
-  final String inputText;
-  final List<String> searchType;
-  final int limit;
+import 'package:equatable/equatable.dart';
 
-  SearchAutoCompleteEntity({
+class SearchAutoCompleteEntity extends Equatable {
+  const SearchAutoCompleteEntity({
     required this.inputText,
     required this.searchType,
     required this.limit,
   });
+  final String inputText;
+  final List<String> searchType;
+  final int limit;
+
+  @override
+  List<Object?> get props => <Object?>[inputText, searchType, limit];
 }

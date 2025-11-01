@@ -1,11 +1,12 @@
 import 'package:fpdart/fpdart.dart';
+
 import '../error/failures.dart';
 
 Future<Either<AppFailures, Success>> safeCall<Success>(
   Future<Success> Function() call,
 ) async {
   try {
-    final result = await call();
+    final Success result = await call();
     return right(result);
   } on ClientFailures catch (e) {
     return left(ClientFailures(message: e.message, statusCode: e.statusCode));

@@ -1,24 +1,23 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:my_travaly/core/pref/pref.dart';
-import 'package:my_travaly/core/utils/app_logger.dart';
 
 import '../../../../core/error/failures.dart';
+import '../../../../core/pref/pref.dart';
+import '../../../../core/utils/app_logger.dart';
 import '../../domain/entities/search_auto_complete_response_entity.dart';
 import '../../domain/usecase/device_register_usecase.dart';
 import '../../domain/usecase/search_auto_complete_usecase.dart';
+
+part 'home_bloc.freezed.dart';
 part 'home_event.dart';
 part 'home_state.dart';
-part 'home_bloc.freezed.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  final DeviceRegisterUsecase _deviceRegisterUsecase;
-  final SearchAutoCompleteUsecase _searchAutoCompleteUsecase;
-  final _deviceInfoPlugin = DeviceInfoPlugin();
   HomeBloc({
     required DeviceRegisterUsecase deviceRegisterUsecase,
     required SearchAutoCompleteUsecase searchAutoCompleteUsecase,
@@ -29,12 +28,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<_RegisterDevice>(_deviceRegisterFn);
     on<_SearchAutoComplete>(_searchAutoCompleteFn);
   }
+  final DeviceRegisterUsecase _deviceRegisterUsecase;
+  final SearchAutoCompleteUsecase _searchAutoCompleteUsecase;
+  final DeviceInfoPlugin _deviceInfoPlugin = DeviceInfoPlugin();
 
   Future<void> _getDeviceInfoFn(
     _GetDeviceInfo event,
     Emitter<HomeState> emit,
   ) async {
-    final res = await SharedPref.getVisitorToken();
+    final String? res = await SharedPref.getVisitorToken();
     if (res != null) {
       AppLogger.success('$res  visitor token');
       // Device already Register
@@ -44,7 +46,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(state.copyWith(isLoading: true));
     late final DeviceRegisterParam deviceParam;
     if (Platform.isAndroid) {
-      final androidInfo = await _deviceInfoPlugin.androidInfo;
+      final AndroidDeviceInfo androidInfo = await _deviceInfoPlugin.androidInfo;
 
       deviceParam = DeviceRegisterParam(
         deviceModel: androidInfo.model,
@@ -54,20 +56,20 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         deviceName: androidInfo.display,
         deviceManufacturer: androidInfo.manufacturer,
         deviceProduct: androidInfo.product,
-        deviceSerialNumber: "unknown",
+        deviceSerialNumber: 'unknown',
       );
     } else {
-      final iosInfo = await _deviceInfoPlugin.iosInfo;
+      final IosDeviceInfo iosInfo = await _deviceInfoPlugin.iosInfo;
 
       deviceParam = DeviceRegisterParam(
         deviceModel: iosInfo.model,
-        deviceFingerprint: iosInfo.identifierForVendor ?? "unknown",
-        deviceBrand: "Apple",
-        deviceId: iosInfo.identifierForVendor ?? "unknown",
+        deviceFingerprint: iosInfo.identifierForVendor ?? 'unknown',
+        deviceBrand: 'Apple',
+        deviceId: iosInfo.identifierForVendor ?? 'unknown',
         deviceName: iosInfo.name,
-        deviceManufacturer: "Apple",
+        deviceManufacturer: 'Apple',
         deviceProduct: iosInfo.model,
-        deviceSerialNumber: "unknown",
+        deviceSerialNumber: 'unknown',
       );
     }
 
@@ -80,7 +82,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   ) async {
     emit(state.copyWith(isLoading: true));
     try {
-      final result = await _deviceRegisterUsecase(event.deviceData);
+      final Either<AppFailures, String> result = await _deviceRegisterUsecase(
+        event.deviceData,
+      );
 
       result.fold(
         (AppFailures failure) {
@@ -127,9 +131,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     try {
       emit(state.copyWith(isSearchLoading: true));
 
-      final result = await _searchAutoCompleteUsecase(
-        event.searchAutoCompleteData,
-      );
+      final Either<AppFailures, SearchAutoCompleteResponseEntity> result =
+          await _searchAutoCompleteUsecase(event.searchAutoCompleteData);
 
       result.fold(
         (AppFailures failure) {

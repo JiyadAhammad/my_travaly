@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_travaly/features/home/presentation/bloc/home_bloc.dart';
 
+import '../bloc/home_bloc.dart';
 import '../widgets/hotel_item.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<HomeBloc>().add(HomeEvent.getDeviceInfo());
+      context.read<HomeBloc>().add(const HomeEvent.getDeviceInfo());
     });
   }
 
@@ -28,12 +28,12 @@ class _HomePageState extends State<HomePage> {
         child: SingleChildScrollView(
           child: Column(
             spacing: 10,
-            children: [
+            children: <Widget>[
               Container(height: 200, color: Colors.red),
               Container(height: 100, color: Colors.green),
               GridView.builder(
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisSpacing: 10,
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 itemCount: 10,
                 itemBuilder: (BuildContext context, int index) {
-                  return HotelItem();
+                  return const HotelItem();
                 },
               ),
             ],

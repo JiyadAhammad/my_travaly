@@ -17,15 +17,6 @@
 import 'package:equatable/equatable.dart';
 
 class DeviceRegisterEntity extends Equatable {
-  final String deviceModel;
-  final String deviceFingerprint;
-  final String deviceBrand;
-  final String deviceId;
-  final String deviceName;
-  final String deviceManufacturer;
-  final String deviceProduct;
-  final String deviceSerialNumber;
-
   const DeviceRegisterEntity({
     required this.deviceModel,
     required this.deviceFingerprint,
@@ -36,9 +27,17 @@ class DeviceRegisterEntity extends Equatable {
     required this.deviceProduct,
     required this.deviceSerialNumber,
   });
+  final String deviceModel;
+  final String deviceFingerprint;
+  final String deviceBrand;
+  final String deviceId;
+  final String deviceName;
+  final String deviceManufacturer;
+  final String deviceProduct;
+  final String deviceSerialNumber;
 
   @override
-  List<Object?> get props => [
+  List<Object?> get props => <Object?>[
     deviceModel,
     deviceFingerprint,
     deviceBrand,

@@ -9,15 +9,14 @@ import '../repository/home_repository.dart';
 class SearchAutoCompleteUsecase
     implements
         UseCase<SearchAutoCompleteResponseEntity, SearchAutoCompleteParam> {
+  const SearchAutoCompleteUsecase(this.homeRepository);
   final HomeRepository homeRepository;
-
-  SearchAutoCompleteUsecase(this.homeRepository);
 
   @override
   Future<Either<AppFailures, SearchAutoCompleteResponseEntity>> call(
     SearchAutoCompleteParam param,
   ) async {
-    return await homeRepository.searchAutoComplete(
+    return homeRepository.searchAutoComplete(
       searchAutoCompleteEntity: SearchAutoCompleteEntity(
         inputText: param.inputText,
         searchType: param.searchType,
@@ -28,13 +27,12 @@ class SearchAutoCompleteUsecase
 }
 
 class SearchAutoCompleteParam {
-  final String inputText;
-  final List<String> searchType;
-  final int limit;
-
-  SearchAutoCompleteParam({
+  const SearchAutoCompleteParam({
     required this.inputText,
     required this.searchType,
     required this.limit,
   });
+  final String inputText;
+  final List<String> searchType;
+  final int limit;
 }

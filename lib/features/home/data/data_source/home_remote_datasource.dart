@@ -23,7 +23,7 @@ abstract interface class HomeRemoteDatasource {
 }
 
 class HomeRemoteDatasourceImpl implements HomeRemoteDatasource {
-  HomeRemoteDatasourceImpl(this.dioClient);
+  const HomeRemoteDatasourceImpl(this.dioClient);
   final DioClient dioClient;
 
   @override
@@ -31,12 +31,12 @@ class HomeRemoteDatasourceImpl implements HomeRemoteDatasource {
     required DeviceRegisterModel deviceRegisterModel,
   }) async {
     try {
-      final response = await dioClient.dio.post(
+      final Response<Map<String, dynamic>> response = await dioClient.dio.post(
         '',
         data: jsonEncode(deviceRegisterModel.toJson()),
       );
 
-      final result = response.data;
+      final Map<String, dynamic>? result = response.data;
 
       /*
       Expected Output
@@ -50,8 +50,9 @@ class HomeRemoteDatasourceImpl implements HomeRemoteDatasource {
         }
       */
       AppLogger.info('$result api response');
-      if (response.statusCode == 201) {
-        final Map<String, dynamic>? data = result['data'];
+      if (response.statusCode == 201 && result != null) {
+        final Map<String, dynamic>? data =
+            result['data'] as Map<String, dynamic>?;
         final String? visitorToken = data != null
             ? data['visitorToken'] as String?
             : null;
@@ -79,21 +80,21 @@ class HomeRemoteDatasourceImpl implements HomeRemoteDatasource {
     required SearchAutoCompleteModel model,
   }) async {
     try {
-      final response = await dioClient.dio.post(
+      final Response<Map<String, dynamic>> response = await dioClient.dio.post(
         '',
         data: jsonEncode(model.toJson()),
       );
 
-      final result = response.data;
-      final statusCode = response.statusCode ?? -1;
+      final Map<String, dynamic>? result = response.data;
+      final int statusCode = response.statusCode ?? -1;
 
       AppLogger.info('$result api response');
       if (statusCode == 200) {
-        return SearchAutoCompleteResponseModel.fromJson(result);
+        return SearchAutoCompleteResponseModel.fromJson(result!);
       }
 
       throw ServerFailures(
-        message: result['message'] ?? 'Unexpected Error Occurred',
+        message: (result?['message'] ?? 'Unexpected Error Occurred') as String,
         statusCode: statusCode,
       );
     } on DioException catch (e) {

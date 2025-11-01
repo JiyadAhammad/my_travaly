@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 class AppLogger {
   AppLogger._();
 
-  static final bool _enableLogs = kDebugMode; // Only logs in debug mode
+  static const bool _enableLogs = kDebugMode; // Only logs in debug mode
 
   static void info(String message, {String tag = 'INFO'}) {
     if (_enableLogs) {

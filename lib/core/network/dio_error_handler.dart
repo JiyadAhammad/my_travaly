@@ -19,8 +19,9 @@ class DioErrorHandler {
     if (e.response != null) {
       return ServerFailures(
         message:
-            e.response?.data?['message'] ??
-            'Server responded with status $statusCode',
+            (e.response?.data?['message'] ??
+                    'Server responded with status $statusCode')
+                as String,
         statusCode: statusCode,
       );
     }

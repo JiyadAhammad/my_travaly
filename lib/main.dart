@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_travaly/init_dependencies.dart';
 
+import 'init_dependencies.dart';
 import 'my_app.dart';
 
 Future<void> main() async {

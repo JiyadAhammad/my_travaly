@@ -32,7 +32,7 @@ class TextWidget extends StatelessWidget {
   });
 
   final Color? color;
-  final String? text;
+  final String text;
   final bool softWrap;
   final int? maxLines;
   final Locale? locale;
@@ -56,10 +56,6 @@ class TextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (text == null || text!.trim().isEmpty) {
-      return fallbackWidget ?? const SizedBox.shrink();
-    }
-
     final TextStyle style =
         this.style ??
         TextStyle(
@@ -74,7 +70,7 @@ class TextWidget extends StatelessWidget {
     return Padding(
       padding: margin,
       child: Text(
-        text!,
+        text,
         style: style,
 
         locale: locale,

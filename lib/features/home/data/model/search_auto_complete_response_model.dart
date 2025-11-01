@@ -1,11 +1,6 @@
 import '../../domain/entities/search_auto_complete_response_entity.dart';
 
 class SearchAutoCompleteResponseModel {
-  bool? status;
-  String? message;
-  int? responseCode;
-  SearchAutoCompleteResponseData? data;
-
   SearchAutoCompleteResponseModel({
     this.status,
     this.message,
@@ -14,20 +9,22 @@ class SearchAutoCompleteResponseModel {
   });
 
   SearchAutoCompleteResponseModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    message = json['message'];
-    responseCode = json['responseCode'];
+    status = json['status'] as bool;
+    message = json['message'] as String;
+    responseCode = json['responseCode'] as int;
     data = json['data'] != null
-        ? SearchAutoCompleteResponseData.fromJson(json['data'])
+        ? SearchAutoCompleteResponseData.fromJson(
+            json['data'] as Map<String, dynamic>,
+          )
         : null;
   }
+  bool? status;
+  String? message;
+  int? responseCode;
+  SearchAutoCompleteResponseData? data;
 }
 
 class SearchAutoCompleteResponseData {
-  bool? present;
-  int? totalNumberOfResult;
-  AutoCompleteList? autoCompleteList;
-
   SearchAutoCompleteResponseData({
     this.present,
     this.totalNumberOfResult,
@@ -35,21 +32,20 @@ class SearchAutoCompleteResponseData {
   });
 
   SearchAutoCompleteResponseData.fromJson(Map<String, dynamic> json) {
-    present = json['present'];
-    totalNumberOfResult = json['totalNumberOfResult'];
+    present = json['present'] as bool;
+    totalNumberOfResult = json['totalNumberOfResult'] as int;
     autoCompleteList = json['autoCompleteList'] != null
-        ? AutoCompleteList.fromJson(json['autoCompleteList'])
+        ? AutoCompleteList.fromJson(
+            json['autoCompleteList'] as Map<String, dynamic>,
+          )
         : null;
   }
+  bool? present;
+  int? totalNumberOfResult;
+  AutoCompleteList? autoCompleteList;
 }
 
 class AutoCompleteList {
-  ByPropertyName? byPropertyName;
-  ByPropertyName? byStreet;
-  ByPropertyName? byCity;
-  ByState? byState;
-  ByPropertyName? byCountry;
-
   AutoCompleteList({
     this.byPropertyName,
     this.byStreet,
@@ -60,48 +56,49 @@ class AutoCompleteList {
 
   AutoCompleteList.fromJson(Map<String, dynamic> json) {
     byPropertyName = json['byPropertyName'] != null
-        ? ByPropertyName.fromJson(json['byPropertyName'])
+        ? ByPropertyName.fromJson(
+            json['byPropertyName'] as Map<String, dynamic>,
+          )
         : null;
     byStreet = json['byStreet'] != null
-        ? ByPropertyName.fromJson(json['byStreet'])
+        ? ByPropertyName.fromJson(json['byStreet'] as Map<String, dynamic>)
         : null;
     byCity = json['byCity'] != null
-        ? ByPropertyName.fromJson(json['byCity'])
+        ? ByPropertyName.fromJson(json['byCity'] as Map<String, dynamic>)
         : null;
     byState = json['byState'] != null
-        ? ByState.fromJson(json['byState'])
+        ? ByState.fromJson(json['byState'] as Map<String, dynamic>)
         : null;
     byCountry = json['byCountry'] != null
-        ? ByPropertyName.fromJson(json['byCountry'])
+        ? ByPropertyName.fromJson(json['byCountry'] as Map<String, dynamic>)
         : null;
   }
+  ByPropertyName? byPropertyName;
+  ByPropertyName? byStreet;
+  ByPropertyName? byCity;
+  ByState? byState;
+  ByPropertyName? byCountry;
 }
 
 class ByPropertyName {
-  bool? present;
-  List<ListOfResult>? listOfResult;
-  int? numberOfResult;
-
   ByPropertyName({this.present, this.listOfResult, this.numberOfResult});
 
   ByPropertyName.fromJson(Map<String, dynamic> json) {
-    present = json['present'];
+    present = json['present'] as bool;
     if (json['listOfResult'] != null) {
       listOfResult = <ListOfResult>[];
-      json['listOfResult'].forEach((v) {
+      json['listOfResult'].forEach((Map<String, dynamic> v) {
         listOfResult!.add(ListOfResult.fromJson(v));
       });
     }
-    numberOfResult = json['numberOfResult'];
+    numberOfResult = json['numberOfResult'] as int;
   }
+  bool? present;
+  List<ListOfResult>? listOfResult;
+  int? numberOfResult;
 }
 
 class ListOfResult {
-  String? valueToDisplay;
-  String? propertyName;
-  Address? address;
-  SearchArray? searchArray;
-
   ListOfResult({
     this.valueToDisplay,
     this.propertyName,
@@ -110,62 +107,63 @@ class ListOfResult {
   });
 
   ListOfResult.fromJson(Map<String, dynamic> json) {
-    valueToDisplay = json['valueToDisplay'];
-    propertyName = json['propertyName'];
+    valueToDisplay = json['valueToDisplay'] as String;
+    propertyName = json['propertyName'] as String;
     address = json['address'] != null
-        ? Address.fromJson(json['address'])
+        ? Address.fromJson(json['address'] as Map<String, dynamic>)
         : null;
     searchArray = json['searchArray'] != null
-        ? SearchArray.fromJson(json['searchArray'])
+        ? SearchArray.fromJson(json['searchArray'] as Map<String, dynamic>)
         : null;
   }
+  String? valueToDisplay;
+  String? propertyName;
+  Address? address;
+  SearchArray? searchArray;
 }
 
 class SearchArray {
-  String? type;
-  List<String>? query;
-
   SearchArray({this.type, this.query});
 
   SearchArray.fromJson(Map<String, dynamic> json) {
-    type = json['type'];
-    query = json['query'].cast<String>();
+    type = json['type'] as String;
+    query = json['query'] as List<String>;
   }
+  String? type;
+  List<String>? query;
 }
 
 class Address {
+  Address({this.street, this.city, this.state, this.country});
+
+  Address.fromJson(Map<String, dynamic> json) {
+    street = json['street'] as String;
+    city = json['city'] as String;
+    state = json['state'] as String;
+    country = json['country'] as String;
+  }
   String? street;
   String? city;
   String? state;
   String? country;
-
-  Address({this.street, this.city, this.state, this.country});
-
-  Address.fromJson(Map<String, dynamic> json) {
-    street = json['street'];
-    city = json['city'];
-    state = json['state'];
-    country = json['country'];
-  }
 }
 
 class ByState {
-  bool? present;
-  List<ListOfResult>? listOfResult;
-  int? numberOfResult;
-
   ByState({this.present, this.listOfResult, this.numberOfResult});
 
   ByState.fromJson(Map<String, dynamic> json) {
-    present = json['present'];
+    present = json['present'] as bool;
     if (json['listOfResult'] != null) {
       listOfResult = <ListOfResult>[];
-      json['listOfResult'].forEach((v) {
+      json['listOfResult'].forEach((Map<String, dynamic> v) {
         listOfResult!.add(ListOfResult.fromJson(v));
       });
     }
-    numberOfResult = json['numberOfResult'];
+    numberOfResult = json['numberOfResult'] as int;
   }
+  bool? present;
+  List<ListOfResult>? listOfResult;
+  int? numberOfResult;
 }
 
 extension SearchAutoCompleteResponseMapper on SearchAutoCompleteResponseModel {
@@ -206,7 +204,9 @@ extension ByPropertyNameMapper on ByPropertyName {
   ByPropertyNameEntity toEntity() {
     return ByPropertyNameEntity(
       present: present,
-      listOfResult: listOfResult?.map((e) => e.toEntity()).toList(),
+      listOfResult: listOfResult
+          ?.map((ListOfResult e) => e.toEntity())
+          .toList(),
       numberOfResult: numberOfResult,
     );
   }
@@ -216,7 +216,9 @@ extension ByStateMapper on ByState {
   ByStateEntity toEntity() {
     return ByStateEntity(
       present: present,
-      listOfResult: listOfResult?.map((e) => e.toEntity()).toList(),
+      listOfResult: listOfResult
+          ?.map((ListOfResult e) => e.toEntity())
+          .toList(),
       numberOfResult: numberOfResult,
     );
   }

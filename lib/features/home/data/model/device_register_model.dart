@@ -25,17 +25,17 @@ class DeviceRegisterModel extends DeviceRegisterEntity {
     );
   }
 
-  Map<String, dynamic> toJson() => {
-    "action": "deviceRegister",
-    "deviceRegister": {
-      "deviceModel": deviceModel,
-      "deviceFingerprint": deviceFingerprint,
-      "deviceBrand": deviceBrand,
-      "deviceId": deviceId,
-      "deviceName": deviceName,
-      "deviceManufacturer": deviceManufacturer,
-      "deviceProduct": deviceProduct,
-      "deviceSerialNumber": deviceSerialNumber,
+  Map<String, dynamic> toJson() => <String, dynamic>{
+    'action': 'deviceRegister',
+    'deviceRegister': <String, String>{
+      'deviceModel': deviceModel,
+      'deviceFingerprint': deviceFingerprint,
+      'deviceBrand': deviceBrand,
+      'deviceId': deviceId,
+      'deviceName': deviceName,
+      'deviceManufacturer': deviceManufacturer,
+      'deviceProduct': deviceProduct,
+      'deviceSerialNumber': deviceSerialNumber,
     },
   };
 }

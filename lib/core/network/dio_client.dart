@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:my_travaly/core/pref/pref.dart';
 
 import '../api_config/api_config.dart';
+import '../pref/pref.dart';
 import '../utils/app_logger.dart';
 
 class DioClient {

@@ -9,5 +9,5 @@ class ApiConfig {
   static const String authToken = '71523fdd8d26f585315b4233e39d9263';
   static const String appSettings = 'appSetting/';
 
-  static const List<String> noTokenEndpoints = [];
+  static const List<String> noTokenEndpoints = <String>[];
 }

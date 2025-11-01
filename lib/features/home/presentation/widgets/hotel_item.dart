@@ -8,23 +8,23 @@ class HotelItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
-        boxShadow: [
+        boxShadow: <BoxShadow>[
           BoxShadow(
             color: Colors.grey.shade200,
             spreadRadius: 2,
             blurRadius: 2,
-            offset: Offset(0, 3),
+            offset: const Offset(0, 3),
           ),
         ],
       ),
       child: Column(
         spacing: 6,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: <Widget>[
           Expanded(
             child: Image.asset(
               'asset/hotel.jpeg',
@@ -32,14 +32,14 @@ class HotelItem extends StatelessWidget {
               width: double.infinity,
             ),
           ),
-          TextWidget(
+          const TextWidget(
             'Hotel name',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          Row(
+          const Row(
             spacing: 8,
-            children: [
+            children: <Widget>[
               Icon(Icons.location_on_outlined),
               Expanded(
                 child: TextWidget(
@@ -50,9 +50,9 @@ class HotelItem extends StatelessWidget {
               ),
             ],
           ),
-          Row(
+          const Row(
             spacing: 8,
-            children: [
+            children: <Widget>[
               TextWidget('2,100', maxLines: 1, overflow: TextOverflow.ellipsis),
               TextWidget(
                 '2600',

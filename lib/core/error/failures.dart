@@ -1,4 +1,4 @@
-class AppFailures {
+class AppFailures implements Exception {
   AppFailures({required this.message, required this.statusCode});
   final String message;
   final int statusCode;
